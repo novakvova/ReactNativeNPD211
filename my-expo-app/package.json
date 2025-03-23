@@ -13,6 +13,7 @@
   "dependencies": {
     "@react-navigation/native": "^7.0.18",
     "expo": "^52.0.40",
+    "expo-router": "^4.0.19",
     "expo-status-bar": "~2.0.1",
     "nativewind": "^4.1.23",
     "react": "18.3.1",
@@ -39,6 +40,6 @@
     "extends": "universe/native",
     "root": true
   },
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry.js",
   "private": true
 }
