@@ -85,7 +85,6 @@ npx tailwindcss init
 Очистка кешу
 ```
 npx expo start --clear
-npx expo prebuild --clean && npx expo run:androi
 ```
 
 Налаштування навігації

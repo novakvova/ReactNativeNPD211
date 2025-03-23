@@ -9,7 +9,7 @@ export default function App() {
   // verifyInstallation();
   return (
     <>
-      <ScreenContent title="Головна сторінка" path="Шпіон" />
+      <ScreenContent title="Головна сторінка--" path="Шпіон" />
       <StatusBar style="auto" />
     </>
   );
