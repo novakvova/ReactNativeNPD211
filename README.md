@@ -76,11 +76,22 @@ Run App Hotkey
 
 Command list. Потрібно запускати в одні мережі вайфа. Тоді усе буде працювати супер.
 Можна роздати інтернет з телефону і відразу конектитися на телефон також працює.
+Налаштовуємо native wind
 ```
-npm install -g expo-cli
+npm install nativewind tailwindcss@^3.4.17 react-native-reanimated@3.16.2 react-native-safe-area-context
+npx tailwindcss init
+```
 
-rm -rf node_modules .expo .expo-shared package-lock.json
-npm install
-npm run android
+Очистка кешу
+```
+npx expo start --clear
+npx expo prebuild --clean && npx expo run:androi
+```
+
+Налаштування навігації
+```
+npx expo install @react-navigation/native react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons
+
+
 
 ```
