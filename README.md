@@ -46,13 +46,13 @@ create a new AVD and Install HAXM
 Create new app react native expo
 
 ```
-npx create-expo-app@latest
-npx create-expo-stack@latest --nativewind
+npx create-expo-app@latest app-spring
 ```
 
 Command run app
 
 ```
+npm start
 1. cd my-expo-app
 2. npm run ios
 3. npm run android
@@ -74,24 +74,3 @@ Run App Hotkey
 › Press o │ open project code in your edito
 ```
 
-Command list. Потрібно запускати в одні мережі вайфа. Тоді усе буде працювати супер.
-Можна роздати інтернет з телефону і відразу конектитися на телефон також працює.
-Налаштовуємо native wind
-```
-npm install nativewind tailwindcss@^3.4.17 react-native-reanimated@3.16.2 react-native-safe-area-context
-npx tailwindcss init
-```
-
-Очистка кешу
-```
-npx expo start --clear
-```
-
-Налаштування навігації
-```
-npx expo install @react-navigation/native react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons
-npm i expo-router
-
-
-
-```
