@@ -1,76 +1,100 @@
-import { Image, StyleSheet, Platform, Text } from 'react-native';
+import React, { useState } from "react";
+import {
+    SafeAreaView,
+    ScrollView,
+    View,
+    Text,
+    KeyboardAvoidingView,
+    Platform,
+    Dimensions,
+    TouchableOpacity,
+} from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import FormField from "@/components/FormField";
+import { useRouter } from "expo-router"; // Використовуємо для навігації
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const SignUpScreen = () => {
+    const router = useRouter(); // Ініціалізуємо роутер
+    const [form, setForm] = useState({ name: "", email: "", password: "" });
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Привіт то я !</ThemedText>
+    const handleChange = (field: string, value: string) => {
+        setForm({ ...form, [field]: value });
+    };
 
-          <Text className = "text-red-500">Hello!</Text>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
-}
+    const handleSignUp = () => {
+        console.log("Реєстрація:", form);
+        // Тут можна додати логіку реєстрації
+    };
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+    return (
+        <SafeAreaProvider>
+            <SafeAreaView className="flex-1">
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    className="flex-1"
+                >
+                    <ScrollView
+                        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20 }}
+                        keyboardShouldPersistTaps="handled"
+                    >
+                        <View
+                            className="w-full flex justify-center items-center my-6"
+                            style={{
+                                minHeight: Dimensions.get("window").height - 100,
+                            }}
+                        >
+                            <Text className="text-3xl font-bold mb-6 text-black">
+                                Реєстрація
+                            </Text>
+
+                            <FormField
+                                title={"Ім'я"}
+                                value={form.name}
+                                handleChangeText={(value: string) => handleChange("name", value)}
+                                placeholder={"Вкажіть ім'я"}
+                            />
+
+                            <FormField
+                                title={"Пошта"}
+                                value={form.email}
+                                handleChangeText={(value: string) => handleChange("email", value)}
+                                placeholder={"Вкажіть пошту"}
+                                keyboardType="email-address"
+                            />
+
+                            <FormField
+                                title={"Пароль"}
+                                value={form.password}
+                                handleChangeText={(value: string) => handleChange("password", value)}
+                                placeholder={"Вкажіть пароль"}
+                                secureTextEntry={true}
+                            />
+
+                            {/* Кнопка "Реєстрація" */}
+                            <TouchableOpacity
+                                onPress={handleSignUp}
+                                className="w-full bg-blue-500 p-4 rounded-lg mt-4"
+                            >
+                                <Text className="text-white text-center text-lg font-bold">
+                                    Зареєструватися
+                                </Text>
+                            </TouchableOpacity>
+
+                            {/* Кнопка "Вхід" */}
+                            <TouchableOpacity
+                                // onPress={() => router.replace("/login")}
+                                className="w-full bg-gray-300 p-4 rounded-lg mt-2"
+                            >
+                                <Text className="text-black text-center text-lg font-medium">
+                                    Вже є акаунт? Увійти
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </SafeAreaView>
+        </SafeAreaProvider>
+    );
+};
+
+export default SignUpScreen;
