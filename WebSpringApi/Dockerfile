@@ -4,12 +4,12 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY ["WebShopApi/WebShopApi.csproj", "WebShopApi/"]
-RUN dotnet restore "WebShopApi/WebShopApi.csproj"
+COPY ["WebSpringApi/WebSpringApi.csproj", "WebSpringApi/"]
+RUN dotnet restore "WebSpringApi/WebSpringApi.csproj"
 
 # copy everything else and build app
 COPY . .
-WORKDIR /source/WebShopApi
+WORKDIR /source/WebSpringApi
 RUN dotnet publish -o /app
 
 
@@ -27,4 +27,4 @@ RUN apt-get update && apt-get install -y \
     apt-get remove -y wget gnupg lsb-release && \
     apt-get clean
 COPY --from=build /app .
-ENTRYPOINT ["dotnet", "WebShopApi.dll"]
+ENTRYPOINT ["dotnet", "WebSpringApi.dll"]
