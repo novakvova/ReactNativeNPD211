@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebSpringApi.Abstract;
 using WebSpringApi.Data;
+using WebSpringApi.Data.Entities.Identity;
 using WebSpringApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<WebSpringDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("WebSpringConnection")));
+
+builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<WebSpringDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IImageService, ImageService>();
 
