@@ -1,0 +1,6 @@
+@WebSpringApi_HostAddress = http://localhost:5029
+
+GET {{WebSpringApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
