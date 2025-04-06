@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using WebSpringApi.Abstract;
 using WebSpringApi.Data;
+using WebSpringApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<WebSpringDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("WebSpringConnection")));
+
+builder.Services.AddScoped<IImageService, ImageService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
