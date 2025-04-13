@@ -11,18 +11,31 @@ import {
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import FormField from "@/components/FormField";
-import { useRouter } from "expo-router"; // Використовуємо для навігації
+import { useRouter } from "expo-router";
+import {useLoginMutation} from "@/services/accountService"; // Використовуємо для навігації
 
 const SignInScreen = () => {
     const router = useRouter(); // Ініціалізуємо роутер
     const [form, setForm] = useState({ email: "", password: "" });
 
+    const [login, { isLoading, error } ] = useLoginMutation();
+
     const handleChange = (field: string, value: string) => {
         setForm({ ...form, [field]: value });
     };
 
-    const handleSignIp = () => {
+    const handleSubmitLogin = async () => {
         console.log("Вхід:", form);
+
+        try {
+            //unwrap - достає результат із відповіді
+            const result = await login(form).unwrap();
+            console.log("login begin", result);
+        }
+        catch {
+            console.log("Login is problem!!!");
+        }
+
         // Тут можна додати логіку реєстрації
     };
 
@@ -66,7 +79,7 @@ const SignInScreen = () => {
 
                             {/* Кнопка "Реєстрація" */}
                             <TouchableOpacity
-                                onPress={handleSignIp}
+                                onPress={handleSubmitLogin}
                                 className="w-full bg-blue-500 p-4 rounded-lg mt-4"
                             >
                                 <Text className="text-white text-center text-lg font-bold">
