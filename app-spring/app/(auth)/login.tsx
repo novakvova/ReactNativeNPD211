@@ -12,7 +12,8 @@ import {
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import FormField from "@/components/FormField";
 import { useRouter } from "expo-router";
-import {useLoginMutation} from "@/services/accountService"; // Використовуємо для навігації
+import {useLoginMutation} from "@/services/accountService";
+import LoadingOverlay from "@/components/LoadingOverlay"; // Використовуємо для навігації
 
 const SignInScreen = () => {
     const router = useRouter(); // Ініціалізуємо роутер
@@ -50,6 +51,8 @@ const SignInScreen = () => {
                         contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20 }}
                         keyboardShouldPersistTaps="handled"
                     >
+                        <LoadingOverlay visible={isLoading} />
+
                         <View
                             className="w-full flex justify-center items-center my-6"
                             style={{
