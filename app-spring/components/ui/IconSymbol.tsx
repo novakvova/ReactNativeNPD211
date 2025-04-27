@@ -12,9 +12,7 @@ const MAPPING = {
   'house.fill': 'home',
   'login.fill': 'login',
   'person-add.fill': 'person-add',
-  'paperplane.fill': 'send',
   'person.crop.circle': 'person', // Login
-  'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as Partial<
   Record<
@@ -42,5 +40,6 @@ export function IconSymbol({
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
 }) {
+  // @ts-ignore
   return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
 }

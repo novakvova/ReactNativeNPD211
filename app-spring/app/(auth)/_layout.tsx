@@ -11,6 +11,8 @@ import {useColorScheme} from '@/hooks/useColorScheme';
 export default function TabLayout() {
     const colorScheme = useColorScheme();
 
+
+    // @ts-ignore
     return (
         <Tabs
             screenOptions={{
@@ -30,6 +32,7 @@ export default function TabLayout() {
                 name="register"
                 options={{
                     title: 'Реєстрація',
+                    // @ts-ignore
                     tabBarIcon: ({color}) => <IconSymbol size={28} name="person-add.fill" color={color}/>,
                 }}
             />
@@ -37,6 +40,7 @@ export default function TabLayout() {
                 name="login"
                 options={{
                     title: 'Вхід',
+                    // @ts-ignore
                     tabBarIcon: ({color}) => <IconSymbol size={28} name="login.fill" color={color}/>,
                 }}
             />

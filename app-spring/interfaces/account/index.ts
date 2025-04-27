@@ -19,3 +19,12 @@ export interface IUserState {
     user: IUser | null
     token: string | null
 }
+
+export interface IRegister {
+    firstname: string;
+    lastname: string;
+    phoneNumber: string;
+    email: string;
+    password: string;
+    image: File | null
+}
