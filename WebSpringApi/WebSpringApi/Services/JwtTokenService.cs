@@ -16,6 +16,7 @@ namespace WebSpringApi.Services
             var claims = new List<Claim>
             {
                 new Claim("email", user.Email),
+                new Claim("image", user.Image),
                 new Claim("name", $"{user.Lastname} {user.Firstname}")
             };
             var roles = await userManager.GetRolesAsync(user);
