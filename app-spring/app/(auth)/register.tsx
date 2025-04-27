@@ -83,7 +83,7 @@ const SignUpScreen = () => {
                         keyboardShouldPersistTaps="handled"
                     >
                         <LoadingOverlay visible={isLoading} />
-                        
+
                         <View
                             className="w-full flex justify-center items-center my-6"
                             style={{
