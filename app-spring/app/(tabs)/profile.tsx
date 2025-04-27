@@ -30,6 +30,7 @@ const ProfileScreen = () => {
         router.replace("/login");
     };
 
+    const windowWidth = Dimensions.get('window').width;
 
     return (
         <SafeAreaProvider>
@@ -51,8 +52,13 @@ const ProfileScreen = () => {
                             {user ? (
                             <>
                                 <Image
-                                    source={{uri: `${IMAGES_URL}/400_${user?.image}`}}
-                                    style={{width: 300, height: 300}}
+                                    source={{ uri: `${IMAGES_URL}/400_${user?.image}` }}
+                                    style={{
+                                        width: windowWidth - 40, // наприклад, відступи по 20 з кожного боку
+                                        height: windowWidth - 40, // або іншу висоту для правильного співвідношення
+                                        borderRadius: 10, // за бажанням
+                                    }}
+                                    resizeMode="cover" // або "contain", залежно від того, що хочеш
                                 />
 
                                 <Text className="text-3xl font-bold my-6 text-black">

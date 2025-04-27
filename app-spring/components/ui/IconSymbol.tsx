@@ -13,6 +13,7 @@ const MAPPING = {
   'login.fill': 'login',
   'person-add.fill': 'person-add',
   'paperplane.fill': 'send',
+  'person.crop.circle': 'person', // Login
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as Partial<
