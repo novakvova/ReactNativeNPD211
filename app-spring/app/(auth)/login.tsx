@@ -13,13 +13,20 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import FormField from "@/components/FormField";
 import { useRouter } from "expo-router";
 import {useLoginMutation} from "@/services/accountService";
-import LoadingOverlay from "@/components/LoadingOverlay"; // Використовуємо для навігації
+import LoadingOverlay from "@/components/LoadingOverlay";
+import {useAppDispatch} from "@/store";
+import {saveToSecureStore} from "@/utils/secureStore";
+import {setCredentials} from "@/store/slices/userSlice";
+import {jwtParse} from "@/utils/jwtParser";
+import {IUser} from "@/interfaces/account"; // Використовуємо для навігації
 
 const SignInScreen = () => {
     const router = useRouter(); // Ініціалізуємо роутер
     const [form, setForm] = useState({ email: "", password: "" });
 
     const [login, { isLoading, error } ] = useLoginMutation();
+
+    const dispatch = useAppDispatch(); // Використовуємо dispatch з Redux
 
     const handleChange = (field: string, value: string) => {
         setForm({ ...form, [field]: value });
@@ -31,7 +38,11 @@ const SignInScreen = () => {
         try {
             //unwrap - достає результат із відповіді
             const result = await login(form).unwrap();
-            console.log("login begin", result);
+            const {token} = result;
+            await saveToSecureStore('authToken', token)
+            dispatch(setCredentials({ user: jwtParse(token) as IUser, token }));
+            // console.log("login begin", result);
+            router.replace("/profile");
         }
         catch {
             console.log("Login is problem!!!");
