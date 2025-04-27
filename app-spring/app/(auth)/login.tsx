@@ -40,6 +40,8 @@ const SignInScreen = () => {
         // Тут можна додати логіку реєстрації
     };
 
+    // console.log("Error--", error);
+
     return (
         <SafeAreaProvider>
             <SafeAreaView className="flex-1">
@@ -62,6 +64,16 @@ const SignInScreen = () => {
                             <Text className="text-3xl font-bold mb-6 text-black">
                                 Вхід
                             </Text>
+
+                            {error ? (
+                                <View className="p-4 mb-4 text-sm text-red-800 bg-red-50 border border-red-300 rounded-lg" role="alert">
+                                    <Text className="font-semibold">
+                                        {'data' in error && error.data && typeof error.data === 'object' && 'error' in error.data
+                                            ? (error.data as any).error
+                                            : 'Something went wrong'}
+                                    </Text>
+                                </View>
+                            ) : null}
 
 
                             <FormField
