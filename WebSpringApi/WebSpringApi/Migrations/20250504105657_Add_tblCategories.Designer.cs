@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebSpringApi.Data;
@@ -11,9 +12,11 @@ using WebSpringApi.Data;
 namespace WebSpringApi.Migrations
 {
     [DbContext(typeof(WebSpringDbContext))]
-    partial class WebSpringDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250504105657_Add_tblCategories")]
+    partial class Add_tblCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

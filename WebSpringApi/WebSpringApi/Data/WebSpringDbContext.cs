@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebSpringApi.Data.Entities;
 using WebSpringApi.Data.Entities.Identity;
 
 namespace WebSpringApi.Data;
@@ -8,6 +9,8 @@ public class WebSpringDbContext : IdentityDbContext<UserEntity, RoleEntity, long
 {
     public WebSpringDbContext(DbContextOptions<WebSpringDbContext> options)
         : base(options) { }
+
+    public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
