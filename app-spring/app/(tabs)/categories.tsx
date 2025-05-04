@@ -10,14 +10,21 @@ import {
     Dimensions
 } from "react-native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
+import {useAppSelector} from "@/store";
+import {useGetCategoriesQuery} from "@/services/categoriesService";
+import {isLoading} from "expo-font";
 
-import {useAppDispatch} from "@/store";
-import {useRouter} from "expo-router";
+
 
 const CategoriesScreen = () => {
-
-
     const windowWidth = Dimensions.get('window').width;
+
+    const token = useAppSelector((state) => state.auth.token);
+
+    const {data, isLoading, error} = useGetCategoriesQuery(token);
+    console.log("token", token);
+
+    console.log(data, isLoading, error);
 
     return (
         <SafeAreaProvider>

@@ -8,11 +8,14 @@ export const categoriesApi = createApi({
     tagTypes: ['Categories'],
 
     endpoints: (builder) => ({
-        getCategories: builder.query<ICategoryItem[], void>({
-            query: () => {
+        getCategories: builder.query<ICategoryItem[], string|null>({
+            query: (token) => {
                 return {
                     url: '',
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             },
         }),
