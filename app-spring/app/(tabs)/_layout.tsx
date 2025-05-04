@@ -39,6 +39,7 @@ export default function TabLayout() {
                 name="categories"
                 options={{
                     title: 'Категорії',
+                    //@ts-ignore
                     tabBarIcon: ({color}) => <IconSymbol size={28} name="category.fill" color={color}/>,
                 }}
             />
